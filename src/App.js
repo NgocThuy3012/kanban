@@ -18,6 +18,11 @@ function App() {
       date:"Sep 26, 2021",
       icon:{icon},
       class:"todo"
+    },
+    {
+      text:'Call aunt Edna ASAP!',
+      content:['Rory’s library books are overdue.','Millie’s dentist appointment is cancelled.'],
+      bg:'bg-pink'
     }
   ]
   const inProgress = [
@@ -26,6 +31,11 @@ function App() {
       date:"Sep 27, 2021",
       icon:{icon},
       class:"inprogress"
+    },
+    {
+      text:'Upcoming performance reviews:',
+      content:['Jacob ✓','Aubrey ✓','Devon (Postponed!)','Katie','Bassam','Gerald'],
+      bg:'bg-b'
     }
   ]
   const done = [
@@ -60,6 +70,16 @@ function App() {
       text:"Schedule 1-on-1 with team.",
       date:"Sep 20, 2021",
       icon:{icon}
+    },
+    {
+      text:'DON’T FORGET TO MEDITATE!',
+      content:[],
+      bg:'bg-blue'
+    },
+    {
+      text:'Inbox ZERO! (Every Fri-yay!) 💃🏻 💃🏻 💃🏻',
+      content:[],
+      bg:'bg-yelow'
     }
   ]
   if(!localStorage.getItem('todo'))
@@ -70,7 +90,7 @@ function App() {
   localStorage.setItem('done', JSON.stringify(done))
   if(!localStorage.getItem('archive'))
   localStorage.setItem('archive', JSON.stringify(archive))
- 
+  
   return (
     <div className='board-container'>
           <div className='card-container'>

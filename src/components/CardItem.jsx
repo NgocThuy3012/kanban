@@ -2,6 +2,7 @@ import { useState } from "react"
 import {RiCalendarCheckLine} from "react-icons/ri"
 import avatar from "../assets/img/avatar.jpg"
 import CardDetail from "./CardDetail"
+import NoteItem from "./NoteItem"
 function CardItem (props){
     const [showDetail, setShowDetail] = useState(false)
     const array = props.info
@@ -12,7 +13,7 @@ function CardItem (props){
         setShowDetail(false)
     }
     return(
-        <><div className='card-item' onClick={(e)=>show(e)}>
+        <>{!array.bg &&<div className='card-item' onClick={(e)=>show(e)}>
             {array.img && <img className='card-img' src={array.img.img} alt=""/>}
             {array.background && <div className="card-img"></div>}
             <div className='card-title'>
@@ -28,7 +29,8 @@ function CardItem (props){
                 <img src={avatar} alt=""/>
             </div>
             <div className={'card_time-line '+ array.class}><span></span></div>
-        </div>
+        </div>}
+        {array.bg &&<NoteItem class= {array.bg} info={array}/>}
         {showDetail &&<div className="over-play">
             <CardDetail 
                 array={array} 

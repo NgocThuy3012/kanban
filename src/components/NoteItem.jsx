@@ -1,14 +1,13 @@
 function NoteItem(props){
+    const list = props.info.content
     return(
         <div className={'card-item ' + props.class }>
             <div className='card-content'>
-                <div>Shopping list:</div>
+                <div>{props.info.text}</div>
                     <ul>
-                        <li>Milk</li>
-                        <li>Eggs</li>
-                        <li>Bread</li>
-                        <li>Soda</li>
-                        <li>Chips</li>
+                    {list.map((item,index)=>(
+                <li>{item}</li>
+            ))}
                     </ul>
             </div>
         </div>

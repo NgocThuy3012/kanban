@@ -142,6 +142,9 @@ code {
 .bg-green{
   background-color: #93E396;
 }
+.bg-blue{
+  background-color: #B1D0FF;
+}
 .insert-card{
   cursor: pointer;
   width: fit-content;
