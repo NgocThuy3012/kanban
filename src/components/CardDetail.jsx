@@ -1,21 +1,43 @@
 import {BsX} from "react-icons/bs"
 import {IoMdList} from "react-icons/io"
-import img from "../assets/img/mountains.jpg"
 import {AiOutlineUser} from "react-icons/ai"
 import {MdOutlineAccessTime} from "react-icons/md"
 import {FiPaperclip} from "react-icons/fi"
 import { useState } from "react"
 function CardDetail(props){
-    const array = props.array
-    const [cards, setCard] = useState(JSON.parse(localStorage.getItem(props.keyStorage)))
+    const [array, setArray] = useState(props.array) 
+    // const [cards, setCards] = useState(JSON.parse(localStorage.getItem(props.keyStorage))) 
+    let cards = JSON.parse(localStorage.getItem(props.keyStorage))
     const [show, setShow] = useState(false)
+    const [showDescription, setShowDescription] = useState(true)
+    const [showInsert, setShowInsert] = useState(!array.content)
     const removeCard = (e) => {
         cards.splice(props.index,1)
         localStorage.setItem(props.keyStorage,JSON.stringify(cards))
         props.close()
     }
-    const handelDescription = () => {
-
+    const handelChangeDescription = () => {
+        // setCards({...cards,[props.index]: ''})
+    }
+    const handelInsertDescription = (e) => {
+        setArray({...array,content : e.target.value})
+        
+    }
+    const save = (e) => {
+        console.log(array)
+        setShow(false)
+        cards[props.index] = array
+        console.log(cards)
+        localStorage.setItem(props.keyStorage, JSON.stringify(cards))
+    }
+    const cacel = (e) => {
+        setShowDescription(true)
+        setShow(false)
+    }
+    const editDescription = (e) => {
+        setShow(true)
+        setShowDescription(false)
+        setShowInsert(true)
     }
     return(
         <div className="detail-container">
@@ -30,13 +52,14 @@ function CardDetail(props){
                     <div className="description-title">
                         <IoMdList/>
                         <h4>Description</h4>
-                       {array.content && <button>Edit</button>}
+                       {showDescription && <button onClick={(e)=>{editDescription(e)}}>Edit</button>}
                     </div>
-                        <div className="description-content">{array.content}</div>
-                        {<input className="more-detail-description" onClick={()=>{setShow(true)}} onChange={e=>handelDescription(e)} name='title' type={'text'} placeholder='Add a more detail desciption...'/>}
+                   
+                       {showDescription && <div className="description-content">{array.content}</div>}
+                        {showInsert  &&<textarea className="more-detail-description" value={array.content} onClick={()=>{setShow(true); setShowDescription(false)}}  onChange={e=>handelInsertDescription(e)} placeholder='Add a more detail desciption...'/>}
                        {show && <div>
-                            <button className="button" >Save</button>
-                            <button className="btn-cancel button" >Cancel</button>
+                            <button className="button" onClick={(e)=>{save(e)}}>Save</button>
+                            <button className="btn-cancel button" onClick={(e)=>{cacel(e)}}>Cancel</button>
                         </div>}
                         
                 </div>

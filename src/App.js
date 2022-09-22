@@ -62,10 +62,14 @@ function App() {
       icon:{icon}
     }
   ]
-  // localStorage.setItem('todo', JSON.stringify(toDo))
-  // localStorage.setItem('inprogress', JSON.stringify(inProgress))
-  // localStorage.setItem('done', JSON.stringify(done))
-  // localStorage.setItem('archive', JSON.stringify(archive))
+  if(!localStorage.getItem('todo'))
+  localStorage.setItem('todo', JSON.stringify(toDo))
+  if(!localStorage.getItem('inprogress'))
+  localStorage.setItem('inprogress', JSON.stringify(inProgress))
+  if(!localStorage.getItem('done'))
+  localStorage.setItem('done', JSON.stringify(done))
+  if(!localStorage.getItem('archive'))
+  localStorage.setItem('archive', JSON.stringify(archive))
  
   return (
     <div className='board-container'>
