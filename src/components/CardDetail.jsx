@@ -4,9 +4,9 @@ import {AiOutlineUser} from "react-icons/ai"
 import {MdOutlineAccessTime} from "react-icons/md"
 import {FiPaperclip} from "react-icons/fi"
 import { useState } from "react"
+import { indexOf } from "lodash-es"
 function CardDetail(props){
     const [array, setArray] = useState(props.array) 
-    // const [cards, setCards] = useState(JSON.parse(localStorage.getItem(props.keyStorage))) 
     let cards = JSON.parse(localStorage.getItem(props.keyStorage))
     const [show, setShow] = useState(false)
     const [showDescription, setShowDescription] = useState(true)
@@ -16,12 +16,8 @@ function CardDetail(props){
         localStorage.setItem(props.keyStorage,JSON.stringify(cards))
         props.close()
     }
-    const handelChangeDescription = () => {
-        // setCards({...cards,[props.index]: ''})
-    }
     const handelInsertDescription = (e) => {
         setArray({...array,content : e.target.value})
-        
     }
     const save = (e) => {
         console.log(array)
@@ -38,6 +34,12 @@ function CardDetail(props){
         setShow(true)
         setShowDescription(false)
         setShowInsert(true)
+    }
+    const removeAttachment = () => {
+        delete array.img;
+        cards[props.index] = array
+        console.log(cards)
+        localStorage.setItem(props.keyStorage, JSON.stringify(cards))
     }
     return(
         <div className="detail-container">
@@ -71,7 +73,7 @@ function CardDetail(props){
                     <div className="description-content">
                         {array.img && <img className='image-detail' src={array.img.img} alt=""/>}
                         
-                        <span>Remove</span>
+                        <span onClick={()=>removeAttachment()}>Remove</span>
                         <span>Edit</span>
                     </div>
                 </div>}
